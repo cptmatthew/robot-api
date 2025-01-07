@@ -1,6 +1,10 @@
 name: Testes com Robot Framework API
 
-on: [push, pull_request]
+on:
+
+  pull_request:
+
+    branches: [ main, master ]
 
 jobs:
 
@@ -26,10 +30,13 @@ jobs:
 
       uses: actions/upload-artifact@v4
 
-      if: always()
+      if: ${{ !cancelled() }}
 
       with:
 
         name: robot-reports
 
         path: reports
+
+
+        retention-days: 2
